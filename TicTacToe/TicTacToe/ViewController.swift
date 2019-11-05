@@ -17,37 +17,45 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var whosTurn: UILabel!
     
-    var player = 1
+    var playerTurn = TicTacToeBrain.init().playerGame
+    var winRow = TicTacToeBrain.init().winningRow
+    var winCol = TicTacToeBrain.init().winningCol
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        welcomeLabel.text = "Welcome to tic-tack-toe"
-        whosTurn.text = "Player 1, its your turn"
-        //        sender.setBackgroundImage(UIImage(named: "omark"), for: .normal)
-        
+        newGame()
     }
     
     
     @IBAction func resetGame(_ sender: UIButton) {
+        newGame()
+        
+    }
+    
+    func newGame() {
+        welcomeLabel.text = "Welcome to tic-tack-toe"
+        whosTurn.text = "Player 1, its your turn"
         for button in gameButtons {
-            button.isHidden = true
+            button.setBackgroundImage(nil, for: .normal)
+            button.isEnabled = true
         }
-        viewDidLoad()
     }
     
     @IBAction func buttonPressed(_ sender: GameButton) {
+        winRow = [0,1,2]
+        winCol = [0,1,2]
         
-        if player == 1 {
+        if playerTurn == 1 {
             whosTurn.text = "Player 2, its your turn"
             sender.setBackgroundImage(UIImage(named: "omark"), for: .normal)
-            player = 2
-        } else  {
+            playerTurn = 2
+        } else {
             whosTurn.text = "Player 1, its your turn"
             sender.setBackgroundImage(UIImage(named: "xmark"), for: .normal)
-            player = 1
+            playerTurn = 1
         }
         
-        
+        sender.isEnabled = false
     }
     
     

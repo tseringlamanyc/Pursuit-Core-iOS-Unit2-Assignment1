@@ -9,5 +9,11 @@
 import Foundation
 
 class TicTacToeBrain {
-  
+    var playerGame = 1
+    var winningRow = GameButton.init().row
+    var winningCol = GameButton.init().col
+    
+    
+    
+
 }
