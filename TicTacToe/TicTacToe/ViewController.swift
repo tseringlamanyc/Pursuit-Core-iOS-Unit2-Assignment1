@@ -38,7 +38,17 @@ class ViewController: UIViewController {
             button.setBackgroundImage(nil, for: .normal)
             button.isEnabled = true
         }
+        
     }
+    
+    func winCondition () {
+        if "a" == fillGrid[0].description   {
+                whosTurn.text = "player 1 won"
+            } else if "b" == fillGrid[0].description {
+                whosTurn.text = "player 2 won"
+            }
+        }
+    
     
     @IBAction func buttonPressed(_ sender: GameButton) {
     
@@ -49,13 +59,14 @@ class ViewController: UIViewController {
                 playerGame = 2
             } else {
                 whosTurn.text = "Player 1, its your turn"
-            fillGrid[sender.row][sender.col] = "b"
+                fillGrid[sender.row][sender.col] = "b"
                 sender.setBackgroundImage(UIImage(named: "xmark"), for: .normal)
                 playerGame = 1
             }
             sender.isEnabled = false
+           
         }
     
-    
+
 }
 
