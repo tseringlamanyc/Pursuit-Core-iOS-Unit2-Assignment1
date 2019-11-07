@@ -41,6 +41,56 @@ class ViewController: UIViewController {
         }
     }
     
+    func winColA() {
+        if "a" == brain.emptyGrid[0][0] && "a" == brain.emptyGrid[1][0] && "a" == brain.emptyGrid[2][0] {
+            whosTurn.text = "player 1 won"
+        } else {
+            if "a" == brain.emptyGrid[0][1] && "a" == brain.emptyGrid[1][1] && "a" == brain.emptyGrid[2][1] {
+                whosTurn.text = "player 1 won"
+            } else {
+                if "a" == brain.emptyGrid[0][2] && "a" == brain.emptyGrid[1][2] && "a" == brain.emptyGrid[2][2] {
+                    whosTurn.text = "player 1 won"
+                }
+            }
+        }
+    }
+    
+    func winColB() {
+        if "b" == brain.emptyGrid[0][0] && "b" == brain.emptyGrid[1][0] && "b" == brain.emptyGrid[2][0] {
+            whosTurn.text = "player 2 won"
+        } else {
+            if "b" == brain.emptyGrid[0][1] && "b" == brain.emptyGrid[1][1] && "b" == brain.emptyGrid[2][1] {
+                whosTurn.text = "player 2 won"
+            } else {
+                if "b" == brain.emptyGrid[0][2] && "b" == brain.emptyGrid[1][2] && "b" == brain.emptyGrid[2][2] {
+                    whosTurn.text = "player 2 won"
+                }
+            }
+        }
+    }
+    
+    func winDiagA() {
+            if "a" == brain.emptyGrid[0][0] && "a" == brain.emptyGrid[1][1] && "a" == brain.emptyGrid[2][2] {
+                whosTurn.text = "player 1 won"
+            } else {
+                if "a" == brain.emptyGrid[0][2] && "a" == brain.emptyGrid[1][1] && "a" == brain.emptyGrid[2][0] {
+                    whosTurn.text = "player 1 won"
+                }
+            }
+        }
+    
+    func winDiagB() {
+        if "b" == brain.emptyGrid[0][0] && "b" == brain.emptyGrid[1][1] && "b" == brain.emptyGrid[2][2] {
+            whosTurn.text = "player 2 won"
+        } else {
+            if "b" == brain.emptyGrid[0][2] && "b" == brain.emptyGrid[1][1] && "b" == brain.emptyGrid[2][0] {
+                whosTurn.text = "player 2 won"
+            }
+        }
+    }
+    
+    
+    
     
     @IBAction func buttonPressed(_ sender: GameButton) {
         
@@ -55,8 +105,10 @@ class ViewController: UIViewController {
             sender.setBackgroundImage(UIImage(named: "xmark"), for: .normal)
             playerGame = 1
         }
-        sender.isEnabled = false
         winRow()
+        winColA()
+        winColB()
+        sender.isEnabled = false
         
     }
     
