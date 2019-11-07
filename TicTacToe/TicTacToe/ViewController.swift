@@ -14,17 +14,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var welcomeLabel: UILabel!
     @IBOutlet weak var resetGame: UIButton!
     @IBOutlet weak var gridImage: UIImageView!
-    
     @IBOutlet weak var whosTurn: UILabel!
+    
+    @IBOutlet weak var playerOneScore: UILabel!
+    @IBOutlet weak var playerTwoScore: UILabel!
+    
     
     
     var brain = TicTacToeBrain()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         newGame()
-        
     }
     
     
@@ -36,20 +36,45 @@ class ViewController: UIViewController {
     func winRow () {
         if ["a","a","a"] == brain.emptyGrid[0] || ["a","a","a"] == brain.emptyGrid[1] || ["a","a","a"] == brain.emptyGrid[2] {
             whosTurn.text = "player 1 won"
+            brain.playerOne += 1
+            playerOneScore.text = "Player 1 score: \(brain.playerOne)"
+            for button in gameButtons {
+                button.isEnabled = false
+            }
         } else if ["b","b","b"] == brain.emptyGrid[0] || ["b","b","b"] == brain.emptyGrid[1] || ["b","b","b"] == brain.emptyGrid[2] {
             whosTurn.text = "player 2 won"
+            brain.playerTWo += 1
+            playerTwoScore.text = "Player 2 score: \(brain.playerTWo)"
+            for button in gameButtons {
+                button.isEnabled = false
+            }
         }
     }
     
     func winColA() {
         if "a" == brain.emptyGrid[0][0] && "a" == brain.emptyGrid[1][0] && "a" == brain.emptyGrid[2][0] {
             whosTurn.text = "player 1 won"
+            brain.playerOne += 1
+            playerOneScore.text = "Player 1 score: \(brain.playerOne)"
+            for button in gameButtons {
+                button.isEnabled = false
+            }
         } else {
             if "a" == brain.emptyGrid[0][1] && "a" == brain.emptyGrid[1][1] && "a" == brain.emptyGrid[2][1] {
                 whosTurn.text = "player 1 won"
+                brain.playerOne += 1
+                playerOneScore.text = "Player 1 score: \(brain.playerOne)"
+                for button in gameButtons {
+                    button.isEnabled = false
+                }
             } else {
                 if "a" == brain.emptyGrid[0][2] && "a" == brain.emptyGrid[1][2] && "a" == brain.emptyGrid[2][2] {
                     whosTurn.text = "player 1 won"
+                    brain.playerOne += 1
+                    playerOneScore.text = "Player 1 score: \(brain.playerOne)"
+                    for button in gameButtons {
+                        button.isEnabled = false
+                    }
                 }
             }
         }
@@ -58,33 +83,68 @@ class ViewController: UIViewController {
     func winColB() {
         if "b" == brain.emptyGrid[0][0] && "b" == brain.emptyGrid[1][0] && "b" == brain.emptyGrid[2][0] {
             whosTurn.text = "player 2 won"
+            brain.playerTWo += 1
+            playerTwoScore.text = "Player 2 score: \(brain.playerTWo)"
+            for button in gameButtons {
+                button.isEnabled = false
+            }
         } else {
             if "b" == brain.emptyGrid[0][1] && "b" == brain.emptyGrid[1][1] && "b" == brain.emptyGrid[2][1] {
                 whosTurn.text = "player 2 won"
+                brain.playerTWo += 1
+                playerTwoScore.text = "Player 2 score: \(brain.playerTWo)"
+                for button in gameButtons {
+                    button.isEnabled = false
+                }
             } else {
                 if "b" == brain.emptyGrid[0][2] && "b" == brain.emptyGrid[1][2] && "b" == brain.emptyGrid[2][2] {
                     whosTurn.text = "player 2 won"
+                    brain.playerTWo += 1
+                    playerTwoScore.text = "Player 2 score: \(brain.playerTWo)"
+                    for button in gameButtons {
+                        button.isEnabled = false
+                    }
                 }
             }
         }
     }
     
     func winDiagA() {
-            if "a" == brain.emptyGrid[0][0] && "a" == brain.emptyGrid[1][1] && "a" == brain.emptyGrid[2][2] {
+        if "a" == brain.emptyGrid[0][0] && "a" == brain.emptyGrid[1][1] && "a" == brain.emptyGrid[2][2] {
+            whosTurn.text = "player 1 won"
+            brain.playerOne += 1
+            playerOneScore.text = "Player 1 score: \(brain.playerOne)"
+            for button in gameButtons {
+                button.isEnabled = false
+            }
+        } else {
+            if "a" == brain.emptyGrid[0][2] && "a" == brain.emptyGrid[1][1] && "a" == brain.emptyGrid[2][0] {
                 whosTurn.text = "player 1 won"
-            } else {
-                if "a" == brain.emptyGrid[0][2] && "a" == brain.emptyGrid[1][1] && "a" == brain.emptyGrid[2][0] {
-                    whosTurn.text = "player 1 won"
+                brain.playerOne += 1
+                playerOneScore.text = "Player 1 score: \(brain.playerOne)"
+                for button in gameButtons {
+                    button.isEnabled = false
                 }
             }
         }
+    }
     
     func winDiagB() {
         if "b" == brain.emptyGrid[0][0] && "b" == brain.emptyGrid[1][1] && "b" == brain.emptyGrid[2][2] {
             whosTurn.text = "player 2 won"
+            brain.playerTWo += 1
+            playerTwoScore.text = "Player 2 score: \(brain.playerTWo)"
+            for button in gameButtons {
+                button.isEnabled = false
+            }
         } else {
             if "b" == brain.emptyGrid[0][2] && "b" == brain.emptyGrid[1][1] && "b" == brain.emptyGrid[2][0] {
                 whosTurn.text = "player 2 won"
+                brain.playerTWo += 1
+                playerTwoScore.text = "Player 2 score: \(brain.playerTWo)"
+                for button in gameButtons {
+                    button.isEnabled = false
+                }
             }
         }
     }
@@ -108,6 +168,8 @@ class ViewController: UIViewController {
         winRow()
         winColA()
         winColB()
+        winDiagA()
+        winDiagB()
         sender.isEnabled = false
         
     }

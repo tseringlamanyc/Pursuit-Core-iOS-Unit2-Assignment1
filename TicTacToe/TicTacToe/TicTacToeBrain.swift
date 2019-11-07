@@ -17,4 +17,7 @@ class TicTacToeBrain {
         ["","",""]
     ]
     
+    var playerOne = 0
+    var playerTWo = 0 
+    
 }
