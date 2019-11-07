@@ -6,18 +6,17 @@
 //  Copyright © 2018 Pursuit. All rights reserved.
 //
 
-import Foundation
-
-var playerGame = 1
+import UIKit
 
 class TicTacToeBrain {
+    
     var emptyGrid = [
         ["","",""],
         ["","",""],
         ["","",""]
     ]
-    
+    var playerGame = 1
     var playerOne = 0
-    var playerTWo = 0 
+    var playerTWo = 0
     
 }

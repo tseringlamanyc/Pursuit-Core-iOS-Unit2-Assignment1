@@ -19,11 +19,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var playerOneScore: UILabel!
     @IBOutlet weak var playerTwoScore: UILabel!
     
-    
-    
     var brain = TicTacToeBrain()
+    var count = TicTacToeBrain.init().emptyGrid.count
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        playerOneScore.text = "Player 1 score: 0"
+        playerTwoScore.text = "Player 2 score: 0"
         newGame()
     }
     
@@ -32,6 +34,21 @@ class ViewController: UIViewController {
         newGame()
     }
     
+    func newGame() {
+        welcomeLabel.text = "Welcome to tic-tack-toe"
+        whosTurn.text = "Player 1, its your turn"
+        for button in gameButtons {
+            button.setBackgroundImage(nil, for: .normal)
+            button.isEnabled = true
+        }
+        brain.playerGame = 1
+        brain.emptyGrid = [
+            ["","",""],
+            ["","",""],
+            ["","",""]
+        ]
+        count = 0
+    }
     
     func winRow () {
         if ["a","a","a"] == brain.emptyGrid[0] || ["a","a","a"] == brain.emptyGrid[1] || ["a","a","a"] == brain.emptyGrid[2] {
@@ -79,6 +96,8 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    
     
     func winColB() {
         if "b" == brain.emptyGrid[0][0] && "b" == brain.emptyGrid[1][0] && "b" == brain.emptyGrid[2][0] {
@@ -150,45 +169,35 @@ class ViewController: UIViewController {
     }
     
     
-    
-    
     @IBAction func buttonPressed(_ sender: GameButton) {
         
-        if playerGame == 1 {
+        if brain.playerGame == 1 {
             brain.emptyGrid[sender.row][sender.col] = "a"
+            count += 1
             whosTurn.text = "Player 2, its your turn"
             sender.setBackgroundImage(UIImage(named: "omark"), for: .normal)
-            playerGame = 2
+            brain.playerGame = 2
         } else {
             whosTurn.text = "Player 1, its your turn"
             brain.emptyGrid[sender.row][sender.col] = "b"
             sender.setBackgroundImage(UIImage(named: "xmark"), for: .normal)
-            playerGame = 1
+            brain.playerGame = 1
+            count += 1
         }
         winRow()
         winColA()
         winColB()
         winDiagA()
         winDiagB()
+        fullBoard()
         sender.isEnabled = false
-        
     }
     
-    func newGame() {
-        welcomeLabel.text = "Welcome to tic-tack-toe"
-        whosTurn.text = "Player 1, its your turn"
-        for button in gameButtons {
-            button.setBackgroundImage(nil, for: .normal)
-            button.isEnabled = true
+    func fullBoard () {
+        if count == 9 {
+            whosTurn.text = "Its a tie, play again"
         }
-        brain.emptyGrid = [
-            ["","",""],
-            ["","",""],
-            ["","",""]
-        ]
-        
     }
     
-    
-}
+    }
 
